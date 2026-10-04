@@ -1,3 +1,7 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  # Skip builds for commits that change only CMS content (Tina saves). Content
+  # goes live with the next code deploy or via a build hook, which Netlify never
+  # skips. Always builds when there is no previous commit to compare against.
+  ignore = "[ -n \"$CACHED_COMMIT_REF\" ] && [ \"$CACHED_COMMIT_REF\" != \"$COMMIT_REF\" ] && git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)src/content' ':(exclude)public/uploads'"
