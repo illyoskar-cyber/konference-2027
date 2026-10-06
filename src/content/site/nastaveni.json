@@ -1,0 +1,43 @@
+{
+  "siteName": "Jak se mění svět 2027",
+  "description": "Sedmý ročník školní konference ZŠ a LMŠ Hnízdo, 23. a 24. března 2027 v Beskydech.",
+  "header": {
+    "name": "ZŠ A LMŠ HNÍZDO",
+    "tagline": "škola, která voní lesem",
+    "nav": [
+      {
+        "active": true,
+        "label": "Domů",
+        "page": "uvod"
+      },
+      {
+        "active": true,
+        "label": "Galerie",
+        "page": "galerie"
+      },
+      {
+        "active": false,
+        "label": "Program",
+        "page": "program"
+      },
+      {
+        "active": true,
+        "label": "Přihláška",
+        "page": "prihlaska"
+      },
+      {
+        "active": true,
+        "label": "Kontakt",
+        "page": "kontakt"
+      },
+      {
+        "active": true,
+        "label": "Minulé ročníky",
+        "page": "rocniky"
+      }
+    ]
+  },
+  "footer": {
+    "text": "2026–2027 · ZŠ a LMŠ Hnízdo a Oskar Illy"
+  }
+}

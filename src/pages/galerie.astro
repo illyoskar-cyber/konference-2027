@@ -1,0 +1,88 @@
+---
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import GalerieBody from '../components/site/GalerieBody.astro';
+import GalleryGrid from '../components/site/GalleryGrid.astro';
+import { asPage, getStranka } from '../lib/site-data';
+import { getGalleryPhotos } from '../lib/site-gallery';
+import { islands } from '../lib/islands';
+
+const data = asPage((await getStranka('galerie')).data?.stranky, 'StrankyGalerie');
+if (!data) return new Response('Not Found', { status: 404 });
+const photos = await getGalleryPhotos();
+
+const navButton =
+	'absolute top-1/2 z-1 flex -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/15 px-3.5 py-2.5 text-xl text-white transition hover:scale-110 hover:bg-white/30 md:px-5 md:py-4 md:text-[30px]';
+---
+
+<SiteLayout title={data.seo?.title || data.title} description={data.seo?.description || undefined} page>
+	<TinaIsland name="site-galerie" wrapper={islands['site-galerie'].wrapper} primary>
+		<GalerieBody data={data} />
+	</TinaIsland>
+
+	<GalleryGrid photos={photos} />
+
+	<dialog
+		id="lightbox"
+		aria-label="Prohlížeč fotek"
+		class="m-0 h-full max-h-none w-full max-w-none items-center justify-center overflow-hidden bg-transparent p-[30px] select-none backdrop:bg-black/75 backdrop:backdrop-blur-[5px] open:flex"
+	>
+		<button
+			type="button"
+			data-close
+			aria-label="Zavřít"
+			class="absolute top-5 right-[30px] z-1 cursor-pointer text-[40px] leading-none text-white opacity-80 transition-opacity hover:opacity-100"
+		>
+			×
+		</button>
+		<button type="button" data-prev aria-label="Předchozí fotka" class:list={[navButton, 'left-2.5 md:left-[25px]']}>
+			❮
+		</button>
+		<img alt="" class="max-h-[80vh] max-w-[80vw] rounded-lg object-contain shadow-[0_10px_40px_rgba(0,0,0,0.5)]" />
+		<button type="button" data-next aria-label="Další fotka" class:list={[navButton, 'right-2.5 md:right-[25px]']}>
+			❯
+		</button>
+		<div data-counter class="absolute bottom-[25px] rounded-[20px] bg-black/40 px-4 py-1.5 text-[0.95rem] font-medium text-white/85">
+		</div>
+	</dialog>
+</SiteLayout>
+
+<script>
+	const dialog = document.querySelector<HTMLDialogElement>('#lightbox')!;
+	const image = dialog.querySelector('img')!;
+	const counter = dialog.querySelector('[data-counter]')!;
+	let links: HTMLAnchorElement[] = [];
+	let index = 0;
+
+	function show(i: number) {
+		index = (i + links.length) % links.length;
+		image.src = links[index].href;
+		image.alt = links[index].querySelector('img')?.alt ?? '';
+		counter.textContent = `${index + 1} / ${links.length}`;
+	}
+
+	// Delegated, so it keeps working after the admin preview re-renders the gallery.
+	document.addEventListener('click', (e) => {
+		const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-lightbox]');
+		if (!link) return;
+		e.preventDefault();
+		links = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]'));
+		show(links.indexOf(link));
+		dialog.showModal();
+	});
+
+	dialog.querySelector('[data-prev]')!.addEventListener('click', () => show(index - 1));
+	dialog.querySelector('[data-next]')!.addEventListener('click', () => show(index + 1));
+	dialog.querySelector('[data-close]')!.addEventListener('click', () => dialog.close());
+
+	// Clicking the dark area around the photo closes the viewer.
+	dialog.addEventListener('click', (e) => {
+		if (e.target === dialog) dialog.close();
+	});
+
+	// Escape is handled natively by <dialog>.
+	dialog.addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowLeft') show(index - 1);
+		if (e.key === 'ArrowRight') show(index + 1);
+	});
+</script>

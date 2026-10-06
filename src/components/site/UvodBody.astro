@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import { tinaField } from '@tinacms/astro/tina-field';
+import type { SiteUvod } from '../../lib/site-data';
+import { fitImage } from '../../lib/site-images';
+import { linkHref } from '../../lib/site';
+
+interface Props {
+	data?: SiteUvod | null;
+}
+
+const { data } = Astro.props;
+// Only items switched on in the CMS are shown.
+const streams = (data?.streams ?? []).flatMap((stream) => (stream?.active ? [stream] : []));
+const shortcuts = (data?.shortcuts ?? []).flatMap((shortcut) => (shortcut?.active ? [shortcut] : []));
+const image = data?.image?.src ? { ...data.image, src: data.image.src, ...(await fitImage(data.image.src, 1600)) } : null;
+const logo = data?.logo?.src ? { ...data.logo, src: data.logo.src, ...(await fitImage(data.logo.src, 1000)) } : null;
+---
+
+{
+	data && (
+		<section class="relative overflow-hidden px-[6vw]">
+			<div class="pointer-events-none absolute -top-[220px] -right-[120px] z-0 size-[520px] rounded-full bg-linear-135/srgb from-v1 to-v2 opacity-18 blur-[70px] md:opacity-28" />
+			<div class="pointer-events-none absolute top-[120px] -left-[140px] z-0 size-[340px] rounded-full bg-linear-135/srgb from-v3 to-v2 opacity-18 blur-[70px] md:opacity-22" />
+
+			<div class="relative z-1 grid items-center md:grid-cols-[1.05fr_0.95fr] md:gap-14">
+				<div class="pt-14 pb-10 md:pt-[100px] md:pb-[90px]">
+					{data.kicker && (
+						<div data-tina-field={tinaField(data, 'kicker')} class="mb-[22px] inline-block text-[0.9rem] font-semibold text-v2">
+							{data.kicker}
+						</div>
+					)}
+					<h1
+						data-tina-field={tinaField(data, 'title')}
+						class="mb-[26px] bg-linear-100/srgb from-v1 via-v2 via-55% to-v3 bg-clip-text text-[clamp(2.7rem,5.6vw,4.3rem)] leading-[1.04] font-semibold tracking-[-0.015em] text-transparent"
+					>
+						{data.title}
+					</h1>
+					{data.perex && (
+						<p data-tina-field={tinaField(data, 'perex')} class="text-[1.08rem] whitespace-pre-line text-muted">
+							{data.perex}
+						</p>
+					)}
+					{streams.length > 0 && (
+						<div class="mt-[38px] flex flex-wrap gap-3.5">
+							{streams.map((stream, i) => (
+								<a
+									href={stream.url}
+									target="_blank"
+									rel="noopener"
+									data-tina-field={tinaField(stream)}
+									class:list={[
+										'rounded-lg px-[22px] py-3 text-[0.92rem] font-semibold transition-transform hover:-translate-y-px',
+										i === 0
+											? 'bg-linear-120/srgb from-v1 to-v2 text-on-accent shadow-accent'
+											: 'border border-line text-ink hover:border-v2 hover:text-v2',
+									]}
+								>
+									{stream.label}
+								</a>
+							))}
+						</div>
+					)}
+				</div>
+				{image && (
+					<div class="relative overflow-hidden rounded-[18px] shadow-hero after:pointer-events-none after:absolute after:inset-0 after:bg-linear-200/srgb after:from-transparent after:from-40% after:to-ink/32">
+						<Image
+							src={image.src}
+							alt={image.alt ?? ''}
+							width={image.width}
+							height={image.height}
+							sizes="(min-width: 820px) 45vw, 100vw"
+							loading="eager"
+							fetchpriority="high"
+							data-tina-field={tinaField(data.image!, 'src')}
+							class="block h-auto w-full"
+						/>
+					</div>
+				)}
+			</div>
+
+			{shortcuts.length > 0 && (
+				<div class="relative z-1 mt-14 flex flex-wrap gap-4 pb-[70px]">
+					{shortcuts.map((shortcut) => (
+						<a
+							href={linkHref(shortcut)}
+							data-tina-field={tinaField(shortcut)}
+							class="block min-w-[200px] rounded-[10px] border border-line bg-surface px-5 py-4 text-[0.95rem] shadow-card transition hover:-translate-y-0.5 hover:border-v2"
+						>
+							<strong class="block font-semibold">{shortcut.title}</strong>
+							{shortcut.text && <span class="mt-1 block text-[0.85rem] text-muted">{shortcut.text}</span>}
+						</a>
+					))}
+				</div>
+			)}
+
+			{logo && (
+				<div class="relative z-1 mt-2 flex items-center gap-4 pb-[60px]">
+					{logo.url ? (
+						<a href={logo.url} target="_blank" rel="noopener" data-tina-field={tinaField(data.logo!)}>
+							<Image src={logo.src} alt={logo.alt ?? ''} width={logo.width} height={logo.height} class="h-[120px] w-auto" />
+						</a>
+					) : (
+						<Image
+							src={logo.src}
+							alt={logo.alt ?? ''}
+							width={logo.width}
+							height={logo.height}
+							data-tina-field={tinaField(data.logo!)}
+							class="h-[120px] w-auto"
+						/>
+					)}
+				</div>
+			)}
+		</section>
+	)
+}

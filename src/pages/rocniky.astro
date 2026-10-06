@@ -1,0 +1,16 @@
+---
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import RocnikyBody from '../components/site/RocnikyBody.astro';
+import { asPage, getStranka } from '../lib/site-data';
+import { islands } from '../lib/islands';
+
+const data = asPage((await getStranka('rocniky')).data?.stranky, 'StrankyRocniky');
+if (!data) return new Response('Not Found', { status: 404 });
+---
+
+<SiteLayout title={data.seo?.title || data.title} description={data.seo?.description || undefined} page>
+	<TinaIsland name="site-rocniky" wrapper={islands['site-rocniky'].wrapper} primary>
+		<RocnikyBody data={data} />
+	</TinaIsland>
+</SiteLayout>

@@ -1,0 +1,17 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+import type { SiteNastaveni } from '../../lib/site-data';
+
+interface Props {
+	data?: SiteNastaveni | null;
+}
+
+const { data } = Astro.props;
+---
+
+<footer
+	data-tina-field={data?.footer ? tinaField(data.footer, 'text') : undefined}
+	class="relative z-1 border-t border-line px-[6vw] pt-10 pb-[60px] text-[0.85rem] text-muted"
+>
+	{data?.footer?.text}
+</footer>

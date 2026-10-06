@@ -1,0 +1,48 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+import PageHead from './PageHead.astro';
+import type { SiteRocniky } from '../../lib/site-data';
+
+interface Props {
+	data?: SiteRocniky | null;
+}
+
+const { data } = Astro.props;
+const editions = (data?.editions ?? []).filter((edition) => edition != null);
+---
+
+{
+	data && (
+		<>
+			<PageHead data={data} />
+
+			<div class="flex max-w-[640px] flex-col gap-4">
+				{editions.map((edition) => (
+					<div
+						data-tina-field={tinaField(edition)}
+						class="flex flex-wrap items-center justify-between gap-5 rounded-xl border border-line px-6 py-5 transition hover:translate-x-0.5 hover:border-v2 md:flex-nowrap"
+					>
+						<div>
+							<h2 data-tina-field={tinaField(edition, 'year')} class="text-[1.3rem] font-semibold">
+								{edition.year}
+							</h2>
+							{edition.meta && (
+								<div data-tina-field={tinaField(edition, 'meta')} class="mt-0.5 text-[0.9rem] text-muted">
+									{edition.meta}
+								</div>
+							)}
+						</div>
+						<a
+							href={edition.url}
+							target="_blank"
+							rel="noopener"
+							class="rounded-[7px] bg-linear-120/srgb from-v1 to-v2 px-4 py-[9px] text-[0.88rem] font-semibold whitespace-nowrap text-on-accent"
+						>
+							Otevřít
+						</a>
+					</div>
+				))}
+			</div>
+		</>
+	)
+}

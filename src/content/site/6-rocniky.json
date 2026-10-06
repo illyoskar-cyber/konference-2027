@@ -1,0 +1,24 @@
+{
+  "adminTitle": "Minulé ročníky",
+  "tag": "Archiv",
+  "title": "Minulé ročníky",
+  "intro": "Podívejte se, jak konference vypadala v předchozích letech.",
+  "editions": [
+    {
+      "year": "Ročník 2026",
+      "meta": "Šestý ročník",
+      "url": "https://jaksemenisvet.wixsite.com/my-site-2"
+    },
+    {
+      "year": "Ročník 2025",
+      "meta": "Patron: Petr Horký",
+      "url": "https://jak-se-meni-svet---konference-zs-a-lms-hnizdo---skola-ktera-v.webnode.cz"
+    },
+    {
+      "year": "Ročník 2024",
+      "meta": "Patron: Jiří Burýšek · program 26.–27. 3. 2024",
+      "url": "https://jak-se-meni-svet---konference-zs-a-lms-hnizdo---skola-ktera-v.webnode.cz/kopie-z-program/"
+    }
+  ],
+  "_template": "rocniky"
+}

@@ -1,0 +1,55 @@
+---
+import '../styles/site.css';
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import { getNastaveni } from '../lib/site-data';
+import { islands } from '../lib/islands';
+
+interface Props {
+	/** Page title; the site name is appended. */
+	title?: string;
+	/** Complete title used as is (home page). Defaults to the site name. */
+	fullTitle?: string;
+	description?: string;
+	/** Subpages get the centered content container. */
+	page?: boolean;
+}
+
+const settings = (await getNastaveni()).data?.nastaveni;
+const siteName = settings?.siteName ?? '';
+
+const { title, fullTitle: fullTitleProp, description = settings?.description ?? '', page = false } = Astro.props;
+
+const fullTitle = title ? `${title} | ${siteName}` : fullTitleProp || siteName;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="cs">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL('/uploads/hero-konference.png', Astro.site)} />
+	</head>
+	<body class="flex min-h-dvh flex-col overflow-x-hidden bg-surface font-sans leading-[1.6] text-ink antialiased">
+		<TinaIsland name="site-header" wrapper={islands['site-header'].wrapper} params={{ current: Astro.url.pathname }}>
+			<SiteHeader data={settings} current={Astro.url.pathname} />
+		</TinaIsland>
+
+		<main class:list={['relative z-1 grow', page && 'mx-auto w-full max-w-[1180px] px-[6vw] pt-[70px] pb-[90px]']}>
+			<slot />
+		</main>
+
+		<TinaIsland name="site-footer" wrapper={islands['site-footer'].wrapper}>
+			<SiteFooter data={settings} />
+		</TinaIsland>
+	</body>
+</html>

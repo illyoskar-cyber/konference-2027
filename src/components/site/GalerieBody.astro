@@ -1,0 +1,14 @@
+---
+import PageHead from './PageHead.astro';
+import type { SiteGalerie } from '../../lib/site-data';
+
+interface Props {
+	data?: SiteGalerie | null;
+}
+
+// Only the texts are editable here; the photos come from the media folder
+// (GalleryGrid, rendered by the page outside the island).
+const { data } = Astro.props;
+---
+
+{data && <PageHead data={data} />}

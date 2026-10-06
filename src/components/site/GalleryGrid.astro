@@ -1,0 +1,45 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { GalleryPhoto } from '../../lib/site-gallery';
+import { fitImage } from '../../lib/site-images';
+
+interface Props {
+	photos: GalleryPhoto[];
+}
+
+const { photos } = Astro.props;
+
+// Thumbnail plus a large version for the lightbox.
+const tiles = await Promise.all(
+	photos.map(async ({ src, tall }, i) => {
+		const thumb = await fitImage(src, 600);
+		const full = await fitImage(src, 2000);
+		const large = await getImage({ src, width: full.width, height: full.height });
+		return { src, tall, thumb, largeSrc: large.src, alt: `Fotografie z konference ${i + 1}` };
+	}),
+);
+---
+
+<div class="grid grid-cols-2 gap-3.5 md:grid-cols-4">
+	{
+		tiles.map(({ src, tall, thumb, largeSrc, alt }) => (
+			<figure
+				class:list={[
+					'group relative m-0 overflow-hidden rounded-[10px] bg-line',
+					tall ? 'aspect-[2/3]' : 'aspect-square',
+				]}
+			>
+				<a href={largeSrc} data-lightbox class="block size-full cursor-zoom-in">
+					<Image
+						src={src}
+						alt={alt}
+						width={thumb.width}
+						height={thumb.height}
+						sizes="(min-width: 820px) 280px, 50vw"
+						class="block size-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+					/>
+				</a>
+			</figure>
+		))
+	}
+</div>

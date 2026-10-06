@@ -1,0 +1,235 @@
+{
+  "_template": "program",
+  "adminTitle": "Program",
+  "tag": "Program",
+  "title": "Program ročníku 2027",
+  "intro": "Konference proběhne 23.–24. března 2027 (úterý–středa).",
+  "days": [
+    {
+      "name": "Úterý, 23. března 2027",
+      "theme": "Společnost, technologie a hranice Evropy",
+      "moderators": "Moderátoři: Maxmilián Michálek & Alžběta Šalamounová",
+      "items": [
+        {
+          "_template": "block",
+          "time": "9:00–10:30",
+          "title": "Blok 1: Evropa v pohybu a digitální věk",
+          "tag": "pouze pro druhý stupeň — náročnější témata",
+          "talks": [
+            {
+              "title": "Demokracie v EU: kritika i obhajoba",
+              "presenter": "Kristián Tejnor",
+              "desc": "Pojem demokracie od antiky po dnešek, časová osa rozvoje a propojení s EU, výhody a nevýhody i možné hrozby dnešní demokracie."
+            },
+            {
+              "title": "Demokracie v EU",
+              "presenter": "Elen Svobodová a Klára Šafranková",
+              "desc": "Politické mapy a popis chodu zemí v EU."
+            },
+            {
+              "title": "Sociální sítě",
+              "presenter": "Beata Gebauerová a Anna Ludvíková",
+              "desc": "Výhody a rizika sociálních sítí."
+            },
+            {
+              "title": "Firmy a technologie v Evropě/EU",
+              "presenter": "Samuel Bužek",
+              "desc": "Moderní technologie v Evropě a firmy jako Siemens, SAP, ASML — k čemu slouží a jak ovlivňují naši budoucnost."
+            },
+            {
+              "title": "Temu, pravda, kterou vám neřeknou",
+              "presenter": "Oskar Illy",
+              "desc": "Čínská nákupní aplikace Temu, marketing, influenceři, gamifikace a tipy, jak být při online nákupech opatrný."
+            },
+            {
+              "title": "Jak Evropská unie ovlivňuje náš každodenní život?",
+              "presenter": "Martin Křenek",
+              "desc": "Konkrétní příklady dopadu EU na běžné občany — cestování bez hranic, zrušení roamingu."
+            },
+            {
+              "title": "Evropské volby: proč na nich záleží",
+              "presenter": "Anna Dětská",
+              "desc": "Co jsou evropské volby, účast ve volbách a dopad rozhodnutí Evropského parlamentu na běžný život."
+            }
+          ],
+          "aside": "🎵 Školní kapela"
+        },
+        {
+          "_template": "aside",
+          "text": "10:30–11:00 Svačina (připojuje se první stupeň)"
+        },
+        {
+          "_template": "block",
+          "time": "11:00–12:30",
+          "title": "Blok 2: Kultura, cesty a historie",
+          "tag": "pro všechny úrovně",
+          "talks": [
+            {
+              "title": "Vlakem po Evropě",
+              "presenter": "Amálka Odstrčilová, Josef Gazda",
+              "desc": "Cestování a příroda, srovnání vlaků s auty, druhy vlaků a tipy na chytřejší cestování."
+            },
+            {
+              "title": "Jak křižácké výpravy ovlivnily Evropu?",
+              "presenter": "Jiří Chlebík",
+              "desc": "Dobré i špatné důsledky křižáckých výprav — obchod, znalosti, ale i válčení a narušené vztahy mezi národy."
+            },
+            {
+              "title": "Farm to Fork v praxi",
+              "presenter": "Alžběta Šalamounová",
+              "desc": "Biodynamická farma Kout ve Fořtu u Vrchlabí a spojení strategií Farm to Fork a Green Deal s komunitním uměním."
+            },
+            {
+              "title": "Vídeňská mozaika",
+              "presenter": "Tereza Odstrčilová",
+              "desc": "Vídeň kolem roku 1900 — Alma Mahlerová a okruh umělců a myslitelů kolem ní, propojenost Evropy a otázka identity."
+            },
+            {
+              "title": "Michael Ende",
+              "presenter": "Lucie Czerná",
+              "desc": "Nekonečný příběh, role fantazie a život a dílo německého autora."
+            },
+            {
+              "title": "Provence – krajina s vůní levandule",
+              "presenter": "Jasmína Czerná",
+              "desc": "Jedna z nejmalebnějších oblastí Francie."
+            },
+            {
+              "title": "Fotbal ve Španělsku",
+              "presenter": "Daniel Břenek a Kryštof Klečka",
+              "desc": "Stadiony, týmy, národní tým a zajímavosti."
+            },
+            {
+              "title": "Zimní olympijské hry a Freestyle lyžování",
+              "presenter": "Kristián Nothegger",
+              "desc": "Freestyle lyžování a role EU a green dealu v ochraně zimních sportů před klimatickou změnou."
+            }
+          ],
+          "aside": "🎵 2. kmen — flétničky „Jarní\""
+        },
+        {
+          "_template": "aside",
+          "text": "12:30 Oběd · 🌿 14:00 Venkovní aktivita s Lucií Czernou · 18:45–20:15 Konferenční večer s hudbou a tancem"
+        }
+      ]
+    },
+    {
+      "name": "Středa, 24. března 2027",
+      "theme": "Klima, bezpečnost a udržitelný svět",
+      "moderators": "Moderátoři: Oskar Illy & Lota Brzobohatá",
+      "items": [
+        {
+          "_template": "block",
+          "time": "9:00–10:30",
+          "title": "Blok 3: Zelená dohoda a bezpečnostní výzvy",
+          "tag": "pouze pro druhý stupeň — náročnější témata",
+          "talks": [
+            {
+              "title": "Green Deal, o co vlastně jde?",
+              "presenter": "Viktorie Tea Odstrčilová",
+              "desc": "Co Green Deal znamená, jaké jsou jeho hlavní cíle a jak se dotýká každodenního života."
+            },
+            {
+              "title": "Green Deal pod lupou",
+              "presenter": "Stella Svobodová",
+              "desc": "Jak o Green Dealu mluví média — poznat mýty, fakta a propagandu a ověřovat zdroje."
+            },
+            {
+              "title": "Méně nakupovat, více přemýšlet",
+              "presenter": "Amelie Krestová",
+              "desc": "Jak Green Deal ovlivňuje módu — udržitelná móda, recyklace a omezení fast fashion."
+            },
+            {
+              "title": "Netestujeme na zvířatech. Ale je to pravda?!",
+              "presenter": "Alexandra Františková",
+              "desc": "Testování kosmetiky na zvířatech v Evropě, nekalé praktiky výrobců a tipy na etickou kosmetiku."
+            },
+            {
+              "title": "Moře pod tlakem obchodu",
+              "presenter": "Sofie Prokopcová",
+              "desc": "Obchody a průmysly, které nejvíce znečišťují oceány a moře."
+            },
+            {
+              "title": "Voda v Evropě: sucho, povodně, sdílená odpovědnost",
+              "presenter": "Klára Trávníčková",
+              "desc": "Adaptační opatření na sucho a povodně, zejména zadržování vody v krajině."
+            },
+            {
+              "title": "Od benzínu k elektřině: EU a ekologická revoluce ve Formuli 1",
+              "presenter": "Oskar Fiala",
+              "desc": "Přechod Formule 1 na hybridní motory a cíl uhlíkové neutrality do roku 2030."
+            },
+            {
+              "title": "Doprava v Evropě",
+              "presenter": "Eliška Nová",
+              "desc": "Vlak, auto a letadlo — dopad dopravy na životní prostředí a klima."
+            },
+            {
+              "title": "Evropská strategie biodiverzity do roku 2030",
+              "presenter": "Sofie Mynářová",
+              "desc": "Hlavní cíle strategie a konkrétní chráněné ekosystémy."
+            },
+            {
+              "title": "Brání Evropa Ukrajinu — nebo sama sebe?",
+              "presenter": "Maxmilián Michálek",
+              "desc": "Proč evropské státy podporují Ukrajinu a kde je hranice mezi pomocí a eskalací konfliktu."
+            }
+          ],
+          "aside": "🎵 Komenský: Omnia sponte fluant (pedagogický tým)"
+        },
+        {
+          "_template": "aside",
+          "text": "10:30–11:00 Svačina (připojuje se první stupeň)"
+        },
+        {
+          "_template": "block",
+          "time": "11:00–12:30",
+          "title": "Blok 4: Příroda a naše stopa na planetě",
+          "tag": "pro všechny úrovně",
+          "talks": [
+            {
+              "title": "Na hraně přežití: Klimatické změny a ohrožené druhy",
+              "presenter": "Natalie Uhlárová",
+              "desc": "Jak oteplování vody a mizení korálů ohrožuje ryby a další mořské živočichy."
+            },
+            {
+              "title": "Invazivní druhy v Evropě",
+              "presenter": "Anežka Šidlová",
+              "desc": "Jak invazivní organismy narušují evropskou biodiverzitu a jak se jim lze bránit."
+            },
+            {
+              "title": "Kdo se vrací do našich lesů?",
+              "presenter": "Natálie Sluková",
+              "desc": "Vlk, rys a medvěd — proč zmizeli, proč se vracejí a soužití lidí s velkými šelmami."
+            },
+            {
+              "title": "Ochrana zvířat v EU",
+              "presenter": "Bianca Pustková",
+              "desc": "Jak EU chrání ohrožené savce, ptáky, mořská zvířata, plazy a obojživelníky."
+            },
+            {
+              "title": "Evropská zvířena",
+              "presenter": "Alena Sýkorová, 1. kmen",
+              "desc": "Evropská fauna a proměna jejího života s měnícím se světem."
+            },
+            {
+              "title": "Polární záře nad Evropou",
+              "presenter": "Riva Gazdová, Rozárka Orságová",
+              "desc": "Proč se polární záře objevuje i nad Evropou a jak fyzikálně vzniká."
+            },
+            {
+              "title": "Bílí žraloci",
+              "presenter": "Zoe Guivarch, Lota Brzobohatá",
+              "desc": "Role zdánlivě nebezpečných druhů jako strážců rovnováhy Středozemního moře."
+            }
+          ],
+          "aside": "🎵 Kapela — Óda na radost"
+        },
+        {
+          "_template": "aside",
+          "text": "12:15 Slavnostní zakončení konference a předání Zlatého Ámose · 🦘 Matematický klokan · 12:30 Oběd"
+        }
+      ]
+    }
+  ]
+}

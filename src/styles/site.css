@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/space-grotesk';
+
+@theme {
+	/* ================================================================
+	   BARVY WEBU – stačí měnit jen tady (celý web se přebarví)
+	   ================================================================ */
+	--color-v1: #0f3d6e; /* hlavní tmavá barva (nadpisy, tlačítka, časy) */
+	--color-v2: #1d6fa5; /* střední barva (odkazy, zvýraznění, rámečky) */
+	--color-v3: #4fb2d8; /* světlá barva (přechody, dekorace) */
+	--color-surface: #ffffff; /* pozadí stránky, karty, formuláře */
+	--color-ink: #14181f; /* hlavní text */
+	--color-muted: #5c6270; /* šedý / vedlejší text */
+	--color-on-accent: #ffffff; /* text na barevných tlačítkách */
+
+	/* Odvozené barvy – počítají se samy, měnit netřeba */
+	--color-line: color-mix(in srgb, var(--color-ink) 10%, transparent);
+	--color-tint-1: color-mix(in srgb, var(--color-v2) 7%, var(--color-surface));
+	--color-tint-2: color-mix(in srgb, var(--color-v3) 5%, var(--color-surface));
+
+	--shadow-accent: 0 10px 24px -8px color-mix(in srgb, var(--color-v1) 35%, transparent);
+	--shadow-card: 0 12px 26px -18px color-mix(in srgb, var(--color-ink) 20%, transparent);
+	--shadow-hero: 0 30px 60px -20px color-mix(in srgb, var(--color-ink) 25%, transparent);
+
+	--font-sans: 'Inter Variable', -apple-system, sans-serif;
+	--font-display: 'Space Grotesk Variable', 'Inter Variable', sans-serif;
+
+	/* Breakpoint from the original template (mobile layout below 820px) */
+	--breakpoint-md: 51.25rem;
+	/* Desktop menu from 768px, off-canvas menu below */
+	--breakpoint-nav: 48rem;
+}
+
+@layer base {
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-display);
+	}
+
+	/* No page scrolling behind the open off-canvas menu */
+	html:has(#mobile-menu[open]) {
+		overflow: hidden;
+	}
+}

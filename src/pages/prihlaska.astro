@@ -1,0 +1,94 @@
+---
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PrihlaskaBody from '../components/site/PrihlaskaBody.astro';
+import { asPage, getStranka } from '../lib/site-data';
+import { islands } from '../lib/islands';
+
+const data = asPage((await getStranka('prihlaska')).data?.stranky, 'StrankyPrihlaska');
+if (!data) return new Response('Not Found', { status: 404 });
+---
+
+<SiteLayout title={data.seo?.title || data.title} description={data.seo?.description || undefined} page>
+	<TinaIsland name="site-prihlaska" wrapper={islands['site-prihlaska'].wrapper} primary>
+		<PrihlaskaBody data={data} />
+	</TinaIsland>
+</SiteLayout>
+
+<script>
+	// Delegated handlers, so the form keeps working after the admin preview
+	// re-renders it.
+
+	// Spoluautoři: každý další prezentující dostane pole Jmeno_N, Prijmeni_N, Email_N.
+	function addPresenter(form: HTMLFormElement) {
+		const list = form.querySelector<HTMLElement>('[data-presenter-list]')!;
+		const template = form.querySelector<HTMLTemplateElement>('template[data-presenter-template]')!;
+		const used = Array.from(list.querySelectorAll<HTMLInputElement>('input[name^="Jmeno_"]'), (input) =>
+			Number(input.name.split('_')[1]),
+		);
+		const n = String(Math.max(0, ...used) + 1);
+		const row = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+		row.querySelectorAll<HTMLInputElement>('input').forEach((input) => {
+			input.name = input.name.replace('__N__', n);
+		});
+		list.append(row);
+		row.querySelector('input')?.focus();
+	}
+
+	function reset(signup: HTMLElement) {
+		const form = signup.querySelector<HTMLFormElement>('[data-signup-form]')!;
+		form.reset();
+		form.querySelectorAll('[data-presenter-list] [data-presenter]').forEach((row, i) => {
+			if (i > 0) row.remove();
+		});
+		signup.querySelector<HTMLElement>('[data-signup-success]')!.hidden = true;
+		form.hidden = false;
+	}
+
+	document.addEventListener('click', (e) => {
+		const target = e.target as Element;
+		const add = target.closest('[data-add-presenter]');
+		if (add) addPresenter(add.closest('form')!);
+		target.closest('[data-remove]')?.closest('[data-presenter]')?.remove();
+		const resetButton = target.closest('[data-reset]');
+		if (resetButton) reset(resetButton.closest<HTMLElement>('[data-signup]')!);
+	});
+
+	document.addEventListener('submit', async (e) => {
+		const form = (e.target as Element).closest<HTMLFormElement>('[data-signup-form]');
+		if (!form) return;
+		e.preventDefault();
+
+		const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+		const error = form.querySelector<HTMLElement>('[data-error]')!;
+		const showError = (message: string) => {
+			error.textContent = message;
+			error.classList.remove('hidden');
+		};
+
+		error.classList.add('hidden');
+		submit.disabled = true;
+		submit.textContent = 'Odesílám…';
+
+		try {
+			const response = await fetch(form.action, {
+				method: 'POST',
+				body: new FormData(form),
+				headers: { Accept: 'application/json' },
+			});
+			if (response.ok) {
+				form.hidden = true;
+				form.closest('[data-signup]')!.querySelector<HTMLElement>('[data-signup-success]')!.hidden = false;
+				return;
+			}
+			const result = await response.json().catch(() => ({}));
+			const messages = (result.errors ?? []).map((err: { message: string }) => err.message);
+			showError(messages.length ? messages.join(', ') : 'Při odesílání došlo k chybě. Zkuste to prosím znovu.');
+		} catch {
+			showError('Při odesílání došlo k chybě sítě. Zkontrolujte prosím připojení.');
+		} finally {
+			submit.disabled = false;
+			submit.textContent = 'Odeslat přihlášku';
+		}
+	});
+</script>

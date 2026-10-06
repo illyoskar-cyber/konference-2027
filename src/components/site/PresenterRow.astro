@@ -1,0 +1,40 @@
+---
+interface Props {
+	/** Number used in field names (Jmeno_1, …); the template row uses a placeholder. */
+	n: number | string;
+	removable?: boolean;
+}
+
+const { n, removable = false } = Astro.props;
+
+const fields = [
+	{ label: 'Jméno', name: 'Jmeno', type: 'text' },
+	{ label: 'Příjmení', name: 'Prijmeni', type: 'text' },
+	{ label: 'E-mail', name: 'Email', type: 'email' },
+] as const;
+---
+
+<div data-presenter class="rounded-[14px] border border-line bg-surface px-7 py-[26px]">
+	<div class="grid gap-4 md:grid-cols-3">
+		{
+			fields.map((field) => (
+				<label>
+					<span class="mb-1.5 block text-[0.85rem] font-medium text-muted">{field.label}</span>
+					<input
+						type={field.type}
+						name={`${field.name}_${n}`}
+						required
+						class="w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-[0.96rem] text-ink outline-none transition-colors focus:border-v2"
+					/>
+				</label>
+			))
+		}
+	</div>
+	{
+		removable && (
+			<button type="button" data-remove class="mt-2 cursor-pointer text-[0.78rem] text-muted underline">
+				Odebrat
+			</button>
+		)
+	}
+</div>

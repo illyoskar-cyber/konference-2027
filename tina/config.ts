@@ -1,14 +1,10 @@
 import { defineConfig } from "tinacms";
-import { BlogCollection } from "./collections/blog";
-import { GlobalConfigCollection } from "./collections/global-config";
-import { PageCollection } from "./collections/page";
+import { NastaveniCollection } from "./collections/site/nastaveni";
+import { StrankyCollection } from "./collections/site/stranky";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.WORKERS_CI_BRANCH || // Cloudflare Workers Builds
-  process.env.CF_PAGES_BRANCH || // Cloudflare Pages
   process.env.HEAD || // Netlify
   "main";
 
@@ -31,12 +27,7 @@ export default defineConfig({
       publicFolder: "public",
     },
   },
-  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
-    collections: [
-      BlogCollection,
-      PageCollection,
-      GlobalConfigCollection,
-    ],
+    collections: [StrankyCollection, NastaveniCollection],
   },
 });

@@ -1,0 +1,13 @@
+{
+  "_template": "prihlaska",
+  "adminTitle": "Přihláška",
+  "tag": "Přihláška",
+  "title": "Přihláška prezentace",
+  "intro": "Přihlaste svou prezentaci na konferenci Jak se mění svět 2027. Pokud prezentujete ve dvojici nebo ve skupině, přidejte prosím všechny spoluautory.",
+  "subject": "Nová přihláška na konferenci Jak se mění svět 2027",
+  "hint": "Přihláška bude automaticky odeslána na e-mail illy.oskar@gmail.com.",
+  "success": {
+    "title": "Přihláška úspěšně odeslána!",
+    "text": "Děkujeme za vaši přihlášku. Byla automaticky zaznamenána a odeslána na illy.oskar@gmail.com."
+  }
+}

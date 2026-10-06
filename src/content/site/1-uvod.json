@@ -1,0 +1,50 @@
+{
+  "adminTitle": "Úvod",
+  "kicker": "Sedmý ročník školní konference",
+  "title": "Jak se mění svět",
+  "perex": "Konference se koná 23. a 24. března 2027 v Beskydech,\nv ZŠ a LMŠ Hnízdo — škole, která voní lesem.",
+  "image": {
+    "src": "/uploads/hero-konference.png",
+    "alt": "Konference Jak se mění svět"
+  },
+  "streams": [
+    {
+      "active": true,
+      "label": "Stream 1. den",
+      "url": "https://www.youtube.com/live/gBZye9-OEvM?si=LFAPme0_MNKRpqkH&t=443"
+    },
+    {
+      "active": true,
+      "label": "Stream 2. den",
+      "url": "https://www.youtube.com/live/adGsdLZtI_M?si=jzo7aWaOTugJqag2&t=323"
+    }
+  ],
+  "shortcuts": [
+    {
+      "active": true,
+      "title": "Galerie",
+      "text": "Fotky z konference na samostatné stránce",
+      "page": "galerie"
+    },
+    {
+      "active": true,
+      "title": "Přihláška",
+      "text": "Přihlásit prezentaci na konferenci",
+      "page": "prihlaska"
+    },
+    {
+      "active": false,
+      "title": "Program",
+      "text": "Program na konferenci",
+      "page": "program"
+    }
+  ],
+  "logo": {
+    "src": "/uploads/eu-logo.png",
+    "alt": "Co-funded by the EU"
+  },
+  "seo": {
+    "title": "Jak se mění svět 2027 | konference Hnízdo"
+  },
+  "_template": "uvod"
+}

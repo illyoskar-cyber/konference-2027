@@ -1,22 +1,16 @@
 ---
-import Base from '../layouts/Base.astro';
 import TinaIsland from '@tinacms/astro/TinaIsland.astro';
-import PageBody from '../components/islands/PageBody.astro';
-import { getConfig, getPage } from '../lib/data';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import UvodBody from '../components/site/UvodBody.astro';
+import { asPage, getStranka } from '../lib/site-data';
 import { islands } from '../lib/islands';
 
-const slug = 'home';
-const page = await getPage(slug);
-const data = page.data?.page;
+const data = asPage((await getStranka('uvod')).data?.stranky, 'StrankyUvod');
 if (!data) return new Response('Not Found', { status: 404 });
-const config = (await getConfig()).data?.config ?? null;
 ---
 
-<Base
-	title={data.seoTitle || config?.seo?.title || 'TinaCMS + Astro'}
-	description={config?.seo?.description ?? 'Welcome to my website!'}
->
-	<TinaIsland name="page" wrapper={islands.page.wrapper} params={{ slug }} primary>
-		<PageBody data={data} />
+<SiteLayout fullTitle={data.seo?.title || undefined} description={data.seo?.description || undefined}>
+	<TinaIsland name="site-uvod" wrapper={islands['site-uvod'].wrapper} primary>
+		<UvodBody data={data} />
 	</TinaIsland>
-</Base>
+</SiteLayout>

@@ -1,0 +1,47 @@
+{
+  "_template": "kontakt",
+  "adminTitle": "Kontakt",
+  "tag": "Kontakt",
+  "title": "Kontakt a tým",
+  "address": [
+    {
+      "text": "ZŠ a LMŠ Hnízdo — škola, která voní lesem",
+      "url": "https://hnizdobeskydy.cz/"
+    },
+    {
+      "text": "Ostravice č.ev. 906",
+      "url": "https://hnizdobeskydy.cz/"
+    },
+    {
+      "text": "739 14 Ostravice",
+      "url": "https://hnizdobeskydy.cz/"
+    }
+  ],
+  "phone": "+420 725 781 842",
+  "email": "tereza.odstrcilova@vlesedu.cz",
+  "team": [
+    {
+      "name": "Alžběta Šalamounová",
+      "role": "Koordinátorka"
+    },
+    {
+      "name": "Bianca Pustková",
+      "role": "Vizuál"
+    },
+    {
+      "name": "Tereza Odstrčilová",
+      "role": "Mentor"
+    },
+    {
+      "name": "Lota Brzobohatá",
+      "role": "Komunikace"
+    },
+    {
+      "name": "Natálie Uhlárová",
+      "role": "Komunikace"
+    },
+    {
+      "name": "Natálie Sluková"
+    }
+  ]
+}

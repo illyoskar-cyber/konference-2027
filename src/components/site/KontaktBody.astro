@@ -1,0 +1,82 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+import PageHead from './PageHead.astro';
+import type { SiteKontakt } from '../../lib/site-data';
+
+interface Props {
+	data?: SiteKontakt | null;
+}
+
+const { data } = Astro.props;
+const address = (data?.address ?? []).filter((line) => line != null);
+const team = (data?.team ?? []).filter((member) => member != null);
+
+const heading =
+	'mb-2.5 inline-block bg-linear-100/srgb from-v1 to-v2 bg-clip-text text-[1.02rem] font-semibold text-transparent';
+const line = 'mb-[5px] block text-[0.98rem] text-ink';
+const link = `${line} hover:text-v2`;
+---
+
+{
+	data && (
+		<>
+			<PageHead data={data} />
+
+			<div class="grid gap-12 md:grid-cols-2">
+				<div>
+					{address.length > 0 && (
+						<>
+							<h2 class={heading}>Adresa</h2>
+							{address.map((item) =>
+								item.url ? (
+									<a href={item.url} target="_blank" rel="noopener" data-tina-field={tinaField(item)} class={link}>
+										{item.text}
+									</a>
+								) : (
+									<p data-tina-field={tinaField(item)} class={line}>
+										{item.text}
+									</p>
+								),
+							)}
+						</>
+					)}
+
+					{data.phone && (
+						<>
+							<h2 class:list={[heading, 'mt-[26px]']}>Telefon</h2>
+							<a href={`tel:${data.phone.replace(/\s/g, '')}`} data-tina-field={tinaField(data, 'phone')} class={link}>
+								{data.phone}
+							</a>
+						</>
+					)}
+
+					{data.email && (
+						<>
+							<h2 class:list={[heading, 'mt-[26px]']}>E-mail</h2>
+							<a href={`mailto:${data.email}`} data-tina-field={tinaField(data, 'email')} class={link}>
+								{data.email}
+							</a>
+						</>
+					)}
+				</div>
+
+				{team.length > 0 && (
+					<div>
+						<h2 class={heading}>Organizační tým</h2>
+						<ul>
+							{team.map((member) => (
+								<li
+									data-tina-field={tinaField(member)}
+									class="border-b border-line py-[11px] text-[0.95rem] first:border-t md:whitespace-nowrap"
+								>
+									<b class="font-semibold">{member.name}</b>
+									{member.role && ` — ${member.role}`}
+								</li>
+							))}
+						</ul>
+					</div>
+				)}
+			</div>
+		</>
+	)
+}

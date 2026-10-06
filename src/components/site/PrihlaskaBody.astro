@@ -1,0 +1,90 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+import PageHead from './PageHead.astro';
+import PresenterRow from './PresenterRow.astro';
+import type { SitePrihlaska } from '../../lib/site-data';
+
+interface Props {
+	data?: SitePrihlaska | null;
+}
+
+const { data } = Astro.props;
+
+const fieldLabel = 'mb-2.5 block font-semibold';
+const input =
+	'w-full rounded-lg border border-line bg-surface px-3 py-2.5 text-[0.96rem] text-ink outline-none transition-colors focus:border-v2';
+const submitButton =
+	'cursor-pointer rounded-full bg-linear-120/srgb from-v1 to-v3 px-[26px] py-3.5 text-[0.98rem] font-semibold text-on-accent shadow-accent transition-transform hover:-translate-y-px disabled:cursor-wait disabled:opacity-70';
+---
+
+{
+	data && (
+		<>
+			<PageHead data={data} />
+
+			<div data-signup class="max-w-[760px]">
+				<form data-signup-form action="https://formspree.io/f/xkjgzzrl" method="POST">
+					<input type="hidden" name="_subject" value={data.subject} />
+
+					<div class={fieldLabel}>Prezentující</div>
+					<div data-presenter-list class="mb-5 flex flex-col gap-4">
+						<PresenterRow n={1} />
+					</div>
+					<template data-presenter-template>
+						<PresenterRow n="__N__" removable />
+					</template>
+					<button
+						type="button"
+						data-add-presenter
+						class="mb-[30px] cursor-pointer rounded-lg border border-dashed border-v2 px-4 py-2.5 text-[0.9rem] font-semibold text-v1 hover:bg-v1/6"
+					>
+						+ Přidat dalšího prezentujícího
+					</button>
+
+					<div class="mb-[22px]">
+						<label for="talk-title" class={fieldLabel}>
+							Název prezentace
+						</label>
+						<input type="text" id="talk-title" name="Nazev_prezentace" required class={input} />
+					</div>
+
+					<div class="mb-[22px]">
+						<label for="talk-desc" class={fieldLabel}>
+							Anotace
+						</label>
+						<textarea
+							id="talk-desc"
+							name="Anotace"
+							placeholder="Stručně popište, o čem prezentace bude…"
+							required
+							class:list={[input, 'min-h-[110px] resize-y']}
+						/>
+					</div>
+
+					<button type="submit" class={submitButton}>
+						Odeslat přihlášku
+					</button>
+					<p data-error role="alert" class="mt-3.5 hidden text-[0.9rem] font-medium text-red-700" />
+					{data.hint && (
+						<p data-tina-field={tinaField(data, 'hint')} class="mt-3.5 text-[0.85rem] text-muted">
+							{data.hint}
+						</p>
+					)}
+				</form>
+
+				<div
+					data-signup-success
+					data-tina-field={tinaField(data, 'success')}
+					hidden
+					class="rounded-2xl border border-line bg-linear-135/srgb from-tint-1 to-tint-2 px-[30px] py-[60px] text-center"
+				>
+					<h2 class="mb-2.5 text-[1.4rem]">{data.success?.title}</h2>
+					<p class="mb-[26px] whitespace-pre-line text-muted">{data.success?.text}</p>
+					<button type="button" data-reset class={submitButton}>
+						Odeslat další přihlášku
+					</button>
+				</div>
+			</div>
+		</>
+	)
+}
