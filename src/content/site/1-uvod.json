@@ -9,7 +9,7 @@
   },
   "streams": [
     {
-      "active": true,
+      "active": false,
       "label": "Stream 1. den",
       "url": "d"
     },
