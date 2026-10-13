@@ -1,5 +1,4 @@
 {
-  "_template": "kontakt",
   "adminTitle": "Kontakt",
   "tag": "Kontakt",
   "title": "Kontakt a tým",
@@ -41,7 +40,9 @@
       "role": "Komunikace"
     },
     {
-      "name": "Natálie Sluková"
+      "name": "Natálie Sluková",
+      "role": "Vizuál"
     }
-  ]
+  ],
+  "_template": "kontakt"
 }
